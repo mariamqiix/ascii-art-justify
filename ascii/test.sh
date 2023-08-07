@@ -50,7 +50,7 @@ go run . --align=justify 'HELLO there HOW are YOU?!' thinkertoy
 echo
 echo "---------------------------------------------------------"
 
-echo "go run . --align=right "a -> A b -> B c -> C" shadow"
+echo "go run . --align=right "a -\> A b -\> B c -\> C" shadow"
 go run . --align=right "a -> A b -> B c -> C" shadow
 echo
 echo "---------------------------------------------------------"
