@@ -13,25 +13,28 @@ func main() {
 	index := 1
 	if validation == "output" || validation == "color" || validation == "justify" {
 		index++
-	} else if validation == "colorWletter" || validation == "colorWletterWfont" || validation == "outputWC" || validation == "outputWCF" {
+	} else if validation == "colorWL" || validation == "colorWLF" || validation == "outputWC" || validation == "outputWCF" || validation == "outputWC2" || validation == "outputWCF2" {
 		index += 2
-	} else if validation == "colorW2letter" {
+	} else if validation == "colorW2L" || validation == "colorW2LF" {
 		index += 4
-	} else if validation == "outputWCL" || validation == "outputWCLF" {
+	} else if validation == "outputWCL" || validation == "outputWCLF" || validation == "outputWCL2" || validation == "outputWCLF2" {
 		index += 3
 	}
 
+	CheckLetter(os.Args[index])
 	WordsInArr := strings.Split(os.Args[index], "\\n")
 
 	fileName := "standard"
 	if len(os.Args) == 3 && validation != "output" && validation != "color" && validation != "justify" {
 		fileName = strings.ToLower(os.Args[index+1])
-	} else if len(os.Args) == 4 && validation != "colorWletter" && validation != "outputWC" {
+	} else if len(os.Args) == 4 && validation != "colorWL" && validation != "outputWC" && validation != "outputWC2" {
 		fileName = strings.ToLower(os.Args[index+1])
-	} else if validation == "colorWletterWfont" || validation == "outputWCF" {
+	} else if validation == "colorWLF" || validation == "outputWCF" || validation == "outputWCF2" {
 		fileName = strings.ToLower(os.Args[4])
-	} else if validation == "outputWCLF" {
+	} else if validation == "outputWCLF" || validation == "outputWCLF2" {
 		fileName = strings.ToLower(os.Args[5])
+	} else if validation == "colorW2LF" {
+		fileName = strings.ToLower(os.Args[6])
 	}
 
 	if ascii.CheckPrint(WordsInArr, -1, fileName) == -1 {
@@ -56,21 +59,17 @@ func main() {
 			if strings.Contains(validation, "C") {
 				fmt.Println("We can't print color in the file")
 			}
-			ascii.WriteFile(Words, FirstWord)
+			ascii.WriteFile(Words, FirstWord, validation)
 			FirstWord = false
-		} else if validation == "color" || validation == "colorWletter" || validation == "colorWletterWfont" || validation == "colorW2letter" {
+		} else if validation == "color" || validation == "colorWL" || validation == "colorWLF" || validation == "colorW2L" || validation == "colorW2LF" {
 			letter1 := "NO!!-"
 			color := ascii.CheckColor(strings.ToLower(strings.TrimPrefix(os.Args[1], "--color=")))
-			if validation == "colorWletter" || validation == "colorWletterWfont" {
+			if validation == "colorWL" || validation == "colorWLF" {
 				letter1 = os.Args[index-1]
-			} else if validation == "colorW2letter" {
+			} else if validation == "colorW2L" || validation == "colorW2LF" {
 				letter1 = os.Args[2]
 			}
 			ascii.PrintWithColor(Words, color, Text1, letter1, validation)
-			// else if validation == "justify" {
-			// 	align := strings.ToLower(strings.TrimPrefix(os.Args[1], "--align="))
-			// 	ascii.PrintWithJustify(Words, WordsInArr, align, Text1, fileName, l)
-			// }
 		} else {
 			for w := 0; w < 8; w++ {
 				if len(Text1) == 0 {
@@ -89,6 +88,15 @@ func main() {
 				}
 			}
 			fmt.Println()
+		}
+	}
+}
+
+func CheckLetter(s string) {
+	for g := 0; g < len(s); g++ {
+		if s[g] > 126 || s[g] < 32 {
+			fmt.Println("ERROR: ascii letters only")
+			os.Exit(0)
 		}
 	}
 }

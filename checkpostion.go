@@ -19,7 +19,7 @@ func CheckPostion(Text1, color, letterLenA, validation string) ([]int, []string)
 			nbr = append(nbr, (len(Text1) - len(after) - len(letterLenA)))
 			colors = append(colors, color)
 			TheWord = after
-		} else if validation == "colorW2letter" {
+		} else if validation == "colorW2L" || validation == "colorW2LF" {
 			_, after2, found2 = strings.Cut(TheWord2, os.Args[4])
 			if found2 == true {
 				color = CheckColor(strings.ToLower(strings.TrimPrefix(os.Args[3], "--color=")))
