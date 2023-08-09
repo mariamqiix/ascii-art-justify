@@ -22,6 +22,7 @@ func main() {
 	}
 
 	CheckLetter(os.Args[index])
+	count := strings.Count(os.Args[index], " ")
 	WordsInArr := strings.Split(os.Args[index], "\\n")
 
 	fileName := "standard"
@@ -37,11 +38,10 @@ func main() {
 		fileName = strings.ToLower(os.Args[6])
 	}
 
-	if ascii.CheckPrint(WordsInArr, -1, fileName) == -1 {
+	if ascii.CheckPrint(WordsInArr, -1, count, fileName) == -1 {
 		fmt.Println("too much words , write less")
 		return
 	}
-
 	if ascii.OnlyContains(os.Args[index], "\\n") {
 		WordsInArr = WordsInArr[:len(WordsInArr)-1]
 	}
@@ -69,7 +69,7 @@ func main() {
 			} else if validation == "colorW2L" || validation == "colorW2LF" {
 				letter1 = os.Args[2]
 			}
-			ascii.PrintWithColor(Words, color, Text1, letter1, validation)
+			ascii.PrintWithColor(Words, color, Text1, letter1, validation, WordsInArr, fileName , l , count)
 		} else {
 			for w := 0; w < 8; w++ {
 				if len(Text1) == 0 {
@@ -78,7 +78,7 @@ func main() {
 				for n := 0; n < len(Words); n++ {
 					if validation == "justify" {
 						align := strings.ToLower(strings.TrimPrefix(os.Args[1], "--align="))
-						ascii.PrintWithJustify(Words, WordsInArr, align, fileName, l, n, w)
+						ascii.PrintWithJustify(Words, WordsInArr, align, fileName,"\033[0m", l, n, w, count)
 					} else {
 						fmt.Print(Words[n][w])
 					}
