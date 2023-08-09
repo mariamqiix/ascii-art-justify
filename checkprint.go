@@ -1,24 +1,17 @@
 package ascii
 
-import "os"
-
-
-func CheckPrint(s []string, i int) int {
+func CheckPrint(s []string, i int, filename string) int {
 	count := 0
 	for _, m := range s {
 		j := ""
 		for _, c := range m {
-			file := "standard"
-			if len(os.Args) == 4 {
-				file = os.Args[3]
-			}
-			d := ReadLetter(byte(c), file)[0]
+			d := ReadLetter(byte(c), filename)[0]
 			j += d
 		}
 		width := width()
 		if len(j) <= width {
 			if count == i {
-				return width - len(j)+4
+				return width - len(j) + 4
 			}
 		} else {
 			return -1
