@@ -9,11 +9,14 @@ import (
 func WriteFile(s [][]string, firstWord bool, validation string) {
 	ArgsPass := os.Args
 	fileName := strings.TrimPrefix(ArgsPass[1], "--output=")
-	if validation == "outputWC2" || validation == "outputWCF2" {
+	if strings.Contains(validation, "2") {
 		fileName = strings.TrimPrefix(ArgsPass[2], "--output=")
-	} else if validation == "outputWCL2" || validation == "outputWCLF2" {
+	} else if strings.Contains(validation, "3") {
 		fileName = strings.TrimPrefix(ArgsPass[3], "--output=")
+	} else if strings.Contains(validation, "4") {
+		fileName = strings.TrimPrefix(ArgsPass[4], "--output=")
 	}
+
 	if firstWord == true {
 		os.Remove(fileName)
 	}

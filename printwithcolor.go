@@ -12,9 +12,6 @@ func PrintWithColor(Words [][]string, color, Text1, letter1, validation string) 
 	positions, colors := CheckPostion(Text1, colorB, letter1, validation)
 	FlagB := false
 	for w := 0; w < 8; w++ {
-		if len(Text1) == 0 {
-			break
-		}
 		index := 0
 		stop := 0
 		for n := 0; n < len(Words); n++ {

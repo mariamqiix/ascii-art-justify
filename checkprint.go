@@ -17,7 +17,6 @@ func CheckPrint(s []string, i int, filename string) int {
 			return -1
 		}
 		count++
-
 	}
 	return 1
 }
