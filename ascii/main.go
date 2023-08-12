@@ -10,9 +10,6 @@ import (
 // colorWJL
 func main() {
 	validation := ascii.Validation()
-
-	fmt.Println(validation)
-	fmt.Println(len(os.Args))
 	index := 1
 
 	if !strings.Contains(validation, "W") && validation != "yes" {
