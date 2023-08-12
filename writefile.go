@@ -6,7 +6,8 @@ import (
 	"strings"
 )
 
-func WriteFile(s [][]string, firstWord bool, validation string) {
+func WriteFile(s [][]string, firstWord bool, validation, align string, count int) {
+	fmt.Print(align)
 	ArgsPass := os.Args
 	fileName := strings.TrimPrefix(ArgsPass[1], "--output=")
 	if strings.Contains(validation, "2") {
@@ -27,7 +28,11 @@ func WriteFile(s [][]string, firstWord bool, validation string) {
 		if len(s) != 0 {
 			for w := 0; w < 8; w++ {
 				for n := 0; n < len(s); n++ {
-					file.WriteString(s[n][w])
+					if strings.Contains(validation, "J") {
+						file.WriteString(PrintWithJustify(s, align, n, w, count))
+					} else {
+						file.WriteString(s[n][w])
+					}
 				}
 				if w+1 != 8 {
 					file.WriteString("\n")

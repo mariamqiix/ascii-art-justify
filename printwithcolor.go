@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-func PrintWithColor(Words [][]string, color, Text1, letter1, validation string) {
+func PrintWithColor(Words [][]string, color, Text1, letter1, validation, align string, count int) {
 	colorB := color
 	positions, colors := CheckPostion(Text1, colorB, letter1, validation)
 	FlagB := false
@@ -49,7 +49,12 @@ func PrintWithColor(Words [][]string, color, Text1, letter1, validation string) 
 				rgb, _ := strconv.ParseUint(colorB, 16, 32)
 				colorB = fmt.Sprintf("\033[38;2;%d;%d;%dm", int(rgb>>16&0xFF), int(rgb>>8&0xFF), int(rgb&0xFF))
 			}
-			fmt.Print(colorB, Words[n][w])
+
+			if strings.Contains(validation, "J") {
+				fmt.Print(colorB, PrintWithJustify(Words, align, n, w, count))
+			} else {
+				fmt.Print(colorB, Words[n][w])
+			}
 		}
 		if w+1 != 8 {
 			fmt.Println()
