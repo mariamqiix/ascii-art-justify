@@ -35,7 +35,7 @@ go run . --align=right ABCabc123 thinkertoy
 echo
 echo "---------------------------------------------------------"
 
-echo "go run .--align=center "#$%&\"" thinkertoy"
+echo "go run .--align=center "#$%\&\"" thinkertoy"
 go run . --align=center "#$%&\"" thinkertoy
 echo
 echo "---------------------------------------------------------"

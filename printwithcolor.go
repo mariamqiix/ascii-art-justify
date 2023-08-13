@@ -49,12 +49,7 @@ func PrintWithColor(Words [][]string, color, Text1, letter1, validation, align s
 				rgb, _ := strconv.ParseUint(colorB, 16, 32)
 				colorB = fmt.Sprintf("\033[38;2;%d;%d;%dm", int(rgb>>16&0xFF), int(rgb>>8&0xFF), int(rgb&0xFF))
 			}
-
-			if strings.Contains(validation, "J") {
-				fmt.Print(colorB, PrintWithJustify(Words, align, n, w, count))
-			} else {
-				fmt.Print(colorB, Words[n][w])
-			}
+			fmt.Print(colorB, PrintWithJustify(Words, align, n, w, count))
 		}
 		if w+1 != 8 {
 			fmt.Println()
