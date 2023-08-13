@@ -8,7 +8,7 @@ func CheckPrint(s [][]string, justify string, count2 int) int {
 			j += s[n][3]
 
 	}
-	width := width()
+	width := width()-1
 	if len(j) <= width {
 		if len(j) == width {
 			return 1
