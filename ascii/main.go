@@ -42,18 +42,21 @@ func main() {
 	if strings.Contains(validation, "J") {
 		align = strings.ToLower(ascii.ReturnFlag("--align="))
 	}
-
+	if strings.Contains(validation, "output") {
+		var test [][]string
+		ascii.WriteFile(test, FirstWord, validation, align, 1)
+	}
 	for l := 0; l < len(WordsInArr); l++ {
 		var Words [][]string
 		Text1 := strings.ReplaceAll(WordsInArr[l], "\\t", "   ")
 		for j := 0; j < len(Text1); j++ {
 			Words = append(Words, ascii.ReadLetter(Text1[j], fileName))
 		}
-		if len(Text1) != 0 {
+		if len(Text1) != 0 || strings.Contains(validation, "output") {
 			count := strings.Count(Text1, " ")
 			if strings.Contains(validation, "output") {
-				if strings.Contains(validation, "C") && l == 0 {
-					fmt.Println("The coloerd text can't be print inside the file")
+				if l == 0 && strings.Contains(validation, "C") {
+					fmt.Println("The colored text can't be print inside the file")
 				}
 				ascii.WriteFile(Words, FirstWord, validation, align, count)
 				FirstWord = false
@@ -77,6 +80,8 @@ func main() {
 				}
 				fmt.Println()
 			}
+		} else if !strings.Contains(validation, "output") {
+			fmt.Println()
 		}
 	}
 }

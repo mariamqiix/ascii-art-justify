@@ -15,19 +15,23 @@ func WriteFile(s [][]string, firstWord bool, validation, align string, count int
 	if err != nil {
 		fmt.Println("Error \n", err)
 	} else {
-		for w := 0; w < 8; w++ {
-			for n := 0; n < len(s); n++ {
-				if strings.Contains(validation, "J") {
-					file.WriteString(PrintWithJustify(s, align, n, w, count))
-				} else {
-					file.WriteString(s[n][w])
+		if len(s) != 0 {
+			for w := 0; w < 8; w++ {
+				for n := 0; n < len(s); n++ {
+					if strings.Contains(validation, "J") {
+						file.WriteString(PrintWithJustify(s, align, n, w, count))
+					} else {
+						file.WriteString(s[n][w])
+					}
+				}
+				if w+1 != 8 {
+					file.WriteString("\n")
 				}
 			}
-			if w+1 != 8 {
-				file.WriteString("\n")
-			}
+			file.WriteString("\n")
+		} else {
+			file.WriteString("\n")
 		}
-		file.WriteString("\n")
 	}
 	file.Close()
 }
